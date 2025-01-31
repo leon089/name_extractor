@@ -1,0 +1,54 @@
+ pip install poetry
+ 2451  poetry new name_extractor
+ 2452  cd name_extractor
+
+
+(3.9.16) ~/pythontutor/name_extractor >poetry run pip uninstall name-extractor                           
+poetry install
+
+pyenv install 3.10.12  # Install a newer version                   
+pyenv global 3.10.12   # Set it as the global version
+
+poetry build                                                     
+poetry install
+poetry run name-extractor sample.txt
+
+  2506  poetry run name-extractor sample.txt
+ 2507  poetry run name-extractor --json names.json
+poetry run name-extractor --help    
+ find .                                                           
+.
+./name_extractor
+./name_extractor/cli2.py
+./name_extractor/__init__.py
+./name_extractor/__pycache__
+./name_extractor/__pycache__/__init__.cpython-39.pyc
+./name_extractor/__pycache__/cli2.cpython-39.pyc
+./name_extractor/__pycache__/cli.cpython-39.pyc
+./name_extractor/json
+./name_extractor/json/converter.py
+./name_extractor/json/__init__.py
+./name_extractor/json/__pycache__
+./name_extractor/json/__pycache__/__init__.cpython-39.pyc
+./name_extractor/json/__pycache__/converter.cpython-39.pyc
+./name_extractor/cli.py
+./name_extractor/text
+./name_extractor/text/converter.py
+./name_extractor/text/__init__.py
+./name_extractor/text/__pycache__
+./name_extractor/text/__pycache__/__init__.cpython-39.pyc
+./name_extractor/text/__pycache__/converter.cpython-39.pyc
+./dist
+./dist/name_extractor-0.1.0-py3-none-any.whl
+./dist/name_extractor-0.1.0.tar.gz
+./pyproject.toml
+./tests
+./tests/__init__.py
+./README.md
+./names.json
+./poetry.lock
+./MyINSTALL
+./sample.txt
+
+usage: name-extractor [-h] [--json] input
+
