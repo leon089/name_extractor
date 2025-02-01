@@ -18,7 +18,7 @@ def test_main_ok(monkeypatch, capsys):
 
     # Assert the expected output
     assert "Extracting names from: ['sample.txt']" in captured.out
-
+    #. hfkjasdfh kjasd hfkadshfkads.  hfkjasdfh kjasd hfkadshfkads.  hfkjasdfh kjasd hfkadshfkads.  hfkjasdfh kjasd hfkadshfkads.  hfkjasdfh kjasd hfkadshfkads. 
 def test_main_bad(monkeypatch, capsys):
     # Simulate command-line arguments
     test_args = ["cli.py"]
