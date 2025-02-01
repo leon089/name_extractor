@@ -52,3 +52,29 @@ poetry run name-extractor --help
 
 usage: name-extractor [-h] [--json] input
 
+
+
+➜  name_extractor git:(main) python3 -m venv venv
+➜  name_extractor git:(main) ✗ source venv/bin/activate
+(venv) ➜  name_extractor git:(main) ✗ 
+
+python --version
+
+poetry --version
+
+
+(venv) ➜  name_extractor git:(main) ✗ pyenv --version
+pyenv 2.4.14
+(venv) ➜  name_extractor git:(main) ✗ pyenv local 3.9.16
+
+1.2.2025
+to run poetry run name-extractor sample.txt: poetry install must first run, but python 3.10.2 was used which doesn't support poetry. use ypenv to stwch pyth
+
+
+
+1) pyenv local 3.9.16
+2) poetry --version. # was install already in 3.9.16
+3) poetry install. OK
+4) poetry run name-extractor sample.txt. OK
+
+poetry add --dev pytest

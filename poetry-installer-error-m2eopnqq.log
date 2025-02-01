@@ -1,0 +1,23 @@
+Looking in indexes: https://bahnhub.tech.rz.db.de/artifactory/api/pypi/pypi-remote/simple, https://techuser-stage-stk40:****@bahnhub.tech.rz.db.de/artifactory/api/pypi/stk40-pypi-stage-dev-local/simple
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b5150>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/pypi-remote/simple/poetry/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b5450>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/pypi-remote/simple/poetry/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b55d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/pypi-remote/simple/poetry/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b5780>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/pypi-remote/simple/poetry/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b5930>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/pypi-remote/simple/poetry/
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b61d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/stk40-pypi-stage-dev-local/simple/poetry/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b6410>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/stk40-pypi-stage-dev-local/simple/poetry/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b65f0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/stk40-pypi-stage-dev-local/simple/poetry/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b67d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/stk40-pypi-stage-dev-local/simple/poetry/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x1028b69b0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /artifactory/api/pypi/stk40-pypi-stage-dev-local/simple/poetry/
+ERROR: Could not find a version that satisfies the requirement poetry==2.0.1 (from versions: none)
+ERROR: No matching distribution found for poetry==2.0.1
+
+Traceback:
+
+  File "<stdin>", line 937, in main
+  File "<stdin>", line 574, in run
+  File "<stdin>", line 596, in install
+  File "<stdin>", line 699, in install_poetry
+  File "<stdin>", line 389, in pip
+  File "<stdin>", line 386, in python
+  File "<stdin>", line 379, in run
