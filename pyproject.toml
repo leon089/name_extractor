@@ -12,6 +12,7 @@ python = "^3.9"
 click = "^8.1.8"
 pytest = "^8.0.0"  # ✅ Add pytest as a dev dependency
 
+pre-commit = "^4.1.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -56,4 +57,3 @@ exclude = '''
   | dist
 )/
 '''
-
