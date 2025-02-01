@@ -8,9 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 
-
 [tool.poetry.group.dev.dependencies]
 click = "^8.1.8"
+pytest = "^8.0.0"  # ✅ Add pytest as a dev dependency
 
 [build-system]
 requires = ["poetry-core"]
@@ -18,3 +18,9 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 name-extractor = "name_extractor.cli3:main"
+run-tests = "pytest:main"  # ✅ Add script to run pytest
+
+
+# ✅ Add this section for Poe the Poet tasks
+[tool.poe.tasks]
+test = "pytest tests/test_cli.py"
