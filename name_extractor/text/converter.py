@@ -2,8 +2,9 @@ import re
 
 import name_extractor as a
 
-from .. import \
-    logger  # Import the logger from the parent package's __init__.py
+from .. import (
+    logger,
+)  # Import the logger from the parent package's __init__.py
 
 
 def extract_names_from_text(input_str):

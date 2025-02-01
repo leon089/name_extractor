@@ -1,3 +1,10 @@
+"""asjdh.
+
+This module provides a simple command-line interface (CLI) for extracting names
+from input arguments.
+It expects at least one argument and raises an error if none are provided.
+"""
+
 # name_extractor/cli.py
 import click
 
@@ -8,10 +15,15 @@ from name_extractor.text.converter import extract_names_from_text
 @click.command()
 @click.argument("input")
 @click.option(
-    "--json", "is_json", is_flag=True, help="Specify if the input is a JSON file"
+    "--json",
+    "is_json",
+    is_flag=True,
+    help="Specify if the input is a JSON file",
 )
 def main(input, is_json):
     """
+    test
+
     Extract names from TEXT or JSON files.
     """
     try:

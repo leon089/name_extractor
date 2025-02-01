@@ -1,9 +1,8 @@
 # __init__.py
+import logging
+
 PACKAGE_NAME = "MyPackage"
 DEBUG_MODE = True
-
-# __init__.py
-import logging
 
 # Configure logging
 logging.basicConfig(

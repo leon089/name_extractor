@@ -1,3 +1,10 @@
+"""test.
+
+This module provides a simple command-line interface (CLI) for extracting names
+from input arguments.
+It expects at least one argument and raises an error if none are provided.
+"""
+
 import argparse
 import sys
 
@@ -6,7 +13,16 @@ from name_extractor.text.converter import extract_names_from_text
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Extract names from text or JSON")
+    """
+    Entry point for the CLI.
+
+    This module provides a simple command-line interface (CLI) for extracting
+    names from input arguments.
+    It expects at least one argument and raises an error if none are provided.
+    """
+    parser = argparse.ArgumentParser(
+        description="Extract names from text or JSON"
+    )
 
     parser.add_argument("input", help="Input file path or text string")
     parser.add_argument(
