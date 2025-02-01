@@ -1,0 +1,101 @@
+To integrate linting before a `git push`, you can use **Git hooks**, specifically the **pre-push** or **pre-commit** hook. The most common approach is to use a tool like **pre-commit** to manage these hooks efficiently.
+
+### 🚀 **Step-by-Step Integration with `pre-commit`**
+
+1. **Install `pre-commit`:**
+
+```bash
+pip install pre-commit
+poetry add --group dev pre-commit
+```
+
+2. **Create a `.pre-commit-config.yaml` File:**
+
+```yaml
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.1.1
+    hooks:
+      - id: mypy
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.12.0
+    hooks:
+      - id: isort
+```
+
+3. **Install the Git Hook:**
+
+```bash
+pre-commit install
+```
+
+This installs the hook in `.git/hooks/pre-commit`.
+
+4. **(Optional) Run Pre-Commit Manually to Test:**
+
+```bash
+pre-commit run --all-files
+```
+
+5. **Make a Commit and Push:**
+
+```bash
+git add .
+git commit -m "Your message"
+git push
+```
+
+The `pre-commit` hook will automatically run **Black**, **Flake8**, **Mypy**, and **isort** before the commit is finalized.
+
+---
+
+### ✅ **If You Prefer a Simple Git Hook (Without Pre-Commit):**
+
+1. **Create a Pre-Push Hook:**
+
+```bash
+mkdir -p .git/hooks
+nano .git/hooks/pre-push
+```
+
+2. **Add This Script:**
+
+```bash
+#!/bin/bash
+echo "Running linters before push..."
+
+poetry run black .
+poetry run flake8 .
+poetry run mypy .
+poetry run isort .
+
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Fix errors before pushing."
+  exit 1
+fi
+
+echo "All checks passed!"
+```
+
+3. **Make the Hook Executable:**
+
+```bash
+chmod +x .git/hooks/pre-push
+```
+
+Now, every `git push` will trigger these linters, and the push will be blocked if any linting errors are found.
+
+---
+
+Let me know if you need further tweaks or explanations! 🚀

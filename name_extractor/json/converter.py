@@ -1,5 +1,6 @@
 import json
 
+
 def extract_names_from_json(file_path):
     """Extract names from JSON file assuming it has a 'names' key."""
     with open(file_path, "r", encoding="utf-8") as file:

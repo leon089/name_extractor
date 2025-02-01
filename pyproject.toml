@@ -24,3 +24,36 @@ run-tests = "pytest:main"  # ✅ Add script to run pytest
 # ✅ Add this section for Poe the Poet tasks
 [tool.poe.tasks]
 test = "pytest tests/test_cli.py"
+lint = "flake8 --exclude=venv,.venv"
+format = "black ."
+
+
+
+[tool.poetry.group.lint.dependencies]
+black = { version = "23.1.0" }
+check-manifest = { version = "0.49" }
+docformatter = { version = "1.5.1" }
+flake8-bugbear = { version = "23.1.20" }
+flake8-builtins = { version = "2.1.0" }
+flake8-comprehensions = { version = "3.10.1" }
+flake8-docstrings = { version = "1.7.0" }
+flake8-fixme = { version = "1.1.1" }
+flake8-isort = { version = "6.0.0" }
+flake8-logging-format = { version = "0.9.0" }
+flake8 = { version = "6.0.0" }
+isort = { version = "5.12.0" }
+mypy = { version = "1.1.1" }
+types-PyYAML = { version = "6.0.12.4" }
+pep8-naming = { version = "0.13.3" }
+pydocstyle = { version = "6.3.0" }
+
+[tool.black]
+exclude = '''
+/(
+    \.venv
+  | venv
+  | build
+  | dist
+)/
+'''
+
