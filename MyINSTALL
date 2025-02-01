@@ -78,3 +78,28 @@ to run poetry run name-extractor sample.txt: poetry install must first run, but 
 4) poetry run name-extractor sample.txt. OK
 
 poetry add --dev pytest
+
+poetry add --dev click 
+===
+why this works
+poetry run name-extractor --json names.json
+but this not
+ python  /Users/lihuagao/test/name_extractor/name_extractor/cli2.py --json names.json    
+
+  File "/Users/lihuagao/test/name_extractor/name_extractor/json/converter.py", line 6, in extract_names_from_json
+    data = json.load(file)
+AttributeError: module 'json' has no attribute 'load'
+
+**Root Cause:
+The key difference is how Python resolves module imports based on the current working directory and PYTHONPATH when executing the script.
+
+When you run:
+
+✅ poetry run name-extractor --json names.json
+
+Poetry uses its isolated virtual environment and correctly sets up the PYTHONPATH.
+It ensures the standard library's json module is correctly imported.
+❌ python /path/to/cli2.py --json names.json
+
+Python’s import system may mistake a local module named json.py (or even a folder named json/) for the standard library's json module.
+

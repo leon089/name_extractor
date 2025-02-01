@@ -9,9 +9,12 @@ readme = "README.md"
 python = "^3.9"
 
 
+[tool.poetry.group.dev.dependencies]
+click = "^8.1.8"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-name-extractor = "name_extractor.cli2:main"
+name-extractor = "name_extractor.cli3:main"
