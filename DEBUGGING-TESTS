@@ -1,0 +1,331 @@
+### 🚀 **Debugging `test_cli.py` with `pytest`**
+
+When running `pytest`, you can debug tests using several methods:
+
+1. **Using `print()` Statements** (Quick & Dirty)  
+2. **Using `pytest -s` to See Print Output**  
+3. **Using the Built-in Debugger (`pdb`)**  
+4. **Using `pytest` with `--trace` or `--capture=no`**  
+5. **Advanced Debugging with IDE Integration (VS Code, PyCharm, etc.)**
+
+I'll guide you through each approach.
+
+---
+
+## ✅ **1. Quick Debug with `print()`**
+
+Add `print()` statements to see what's going on:
+
+```python
+# tests/test_cli.py
+import pytest
+from name_extractor.cli import main
+from click.testing import CliRunner
+from unittest.mock import patch
+
+def test_extract_names_from_text_success():
+    runner = CliRunner()
+    with patch("name_extractor.cli.extract_names_from_text", return_value=["Alice", "Bob"]) as mock_func:
+        result = runner.invoke(main, ["sample.txt"])
+        
+        # Debugging output
+        print("Mock called:", mock_func.called)
+        print("Exit Code:", result.exit_code)
+        print("Output:", result.output)
+
+    assert result.exit_code == 0
+    assert "Extracted Names: Alice, Bob" in result.output
+```
+
+Then run:
+
+```bash
+pytest -s tests/test_cli.py
+```
+
+- `-s` allows `stdout` to be printed, showing your `print()` outputs.
+
+---
+
+## ✅ **2. Interactive Debugging with `pdb`**
+
+Insert a breakpoint using `pdb`:
+
+```python
+import pdb
+
+def test_extract_names_from_text_success():
+    runner = CliRunner()
+    with patch("name_extractor.cli.extract_names_from_text", return_value=["Alice", "Bob"]) as mock_func:
+        pdb.set_trace()  # Set a breakpoint here
+        result = runner.invoke(main, ["sample.txt"])
+
+    assert result.exit_code == 0
+    assert "Extracted Names: Alice, Bob" in result.output
+```
+
+Run with:
+
+```bash
+pytest -s tests/test_cli.py
+```
+
+This will drop you into an interactive debugging session when the code hits `pdb.set_trace()`.
+
+### **Common `pdb` Commands:**
+- `n` → Next line
+- `s` → Step into function
+- `c` → Continue execution
+- `q` → Quit debugging
+
+---
+
+## ✅ **3. Use `--trace` for Step-by-Step Execution**
+
+This runs the test interactively from the start:
+
+```bash
+pytest --trace tests/test_cli.py
+```
+
+You'll be prompted at each line to step through the code.
+
+---
+
+## ✅ **4. Disable Output Capturing with `--capture=no`**
+
+Sometimes `pytest` captures `stdout`/`stderr`, hiding output. To disable this:
+
+```bash
+pytest --capture=no tests/test_cli.py
+```
+
+or shorthand:
+
+```bash
+pytest -s tests/test_cli.py
+```
+
+This ensures all print statements and CLI outputs are visible.
+
+---
+
+## ✅ **5. Debugging Mock Issues**
+
+If mocks aren’t behaving as expected, verify:
+- **Correct Patch Path:**  
+  Ensure you patch where the function is **used**, not where it’s **defined**.
+
+```python
+with patch("name_extractor.cli.extract_names_from_text", return_value=["Alice", "Bob"]) as mock_func:
+    result = runner.invoke(main, ["sample.txt"])
+    print("Mock call args:", mock_func.call_args_list)
+```
+
+- **Check Import Issues:**
+
+```python
+import name_extractor.cli
+print(name_extractor.cli.extract_names_from_text)
+```
+
+Ensure it prints the correct reference, not the real function if mocking is failing.
+
+---
+
+## ✅ **6. Advanced Debugging with IDE (VS Code / PyCharm)**
+
+- **VS Code:**
+  1. Install the Python extension.
+  2. Set a breakpoint.
+  3. Add a `.vscode/launch.json`:
+
+     ```json
+     {
+       "version": "0.2.0",
+       "configurations": [
+         {
+           "name": "Python: Test",
+           "type": "python",
+           "request": "launch",
+           "module": "pytest",
+           "args": ["tests/test_cli.py"],
+           "console": "integratedTerminal"
+         }
+       ]
+     }
+     ```
+
+  4. Click **Run > Start Debugging**.
+
+- **PyCharm:**
+  1. Right-click the test file → **Debug**.
+  2. Set breakpoints as needed.
+
+---
+
+## 🧪 **Final Debug Command**
+
+For most cases:
+
+```bash
+pytest -s --capture=no --maxfail=1 --tb=short tests/test_cli.py
+```
+
+- `-s` → Shows all output.
+- `--capture=no` → Disables output capturing.
+- `--maxfail=1` → Stops on first failure.
+- `--tb=short` → Shortens the traceback for readability.
+
+---
+
+Let me know what output you get or if you need help with specific errors! 🚀
+
+## Nr2 chat debugger didn't run first: select .venv poetry env
+
+### 🚩 **Issue with `type: "python"` in VS Code Debug Configuration**
+
+If you're encountering issues with the following VS Code `launch.json` configuration:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Test",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["tests/test_cli.py"],
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+The problem usually stems from either **missing extensions**, **Python environment misconfiguration**, or **incorrect settings** in VS Code.
+
+---
+
+### ✅ **1. Ensure the Python Extension is Installed**
+
+1. Go to the **Extensions** sidebar in VS Code (or press `Ctrl+Shift+X`).
+2. Search for **"Python"** (by Microsoft).
+3. Make sure it’s **installed and enabled**.
+
+---
+
+### ✅ **2. Select the Correct Python Interpreter**
+
+1. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS).
+2. Type **"Python: Select Interpreter"**.
+3. Choose the interpreter linked to your **Poetry environment**:
+   - It should look like `.venv/bin/python` or something inside your Poetry-managed virtual environment.
+
+If you're unsure which interpreter is active, check in the terminal:
+
+```bash
+poetry env info
+```
+
+---
+
+### ✅ **3. Verify `python` in `launch.json`**
+
+The `type: "python"` should work correctly **if the Python extension is active**. If there's an issue, VS Code may suggest an alternative.
+
+However, try this adjustment:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["-s", "tests/test_cli.py"],  // Add "-s" to see stdout
+            "justMyCode": false,                // Debug external libraries if needed
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+### ✅ **4. Install `pytest` in the Poetry Environment**
+
+Ensure `pytest` is installed inside the Poetry environment:
+
+```bash
+poetry add --dev pytest
+```
+
+---
+
+### ✅ **5. Test Running `pytest` Without Debugger**
+
+Before debugging, check if `pytest` works normally:
+
+```bash
+poetry run pytest tests/test_cli.py -v
+```
+
+If this fails, the issue is with your test environment, not VS Code.
+
+---
+
+### ✅ **6. Reload VS Code**
+
+Sometimes VS Code needs a refresh after environment changes:
+
+1. Press `Ctrl+Shift+P`.
+2. Select **"Reload Window"**.
+
+---
+
+### 🚩 **7. If Issue Persists (Common Errors & Fixes)**
+
+- **Error:** _"Cannot find 'python' debugger type"_
+  - **Fix:** Reinstall the Python extension.
+
+- **Error:** _"No module named 'pytest'"_
+  - **Fix:** Activate the correct Poetry environment in VS Code.
+
+    ```bash
+    poetry shell
+    code .
+    ```
+
+- **Error:** _"Python extension activation failed"_
+  - **Fix:** Go to VS Code settings → search **"Python: Enable"** → ensure it's enabled.
+
+---
+
+### 🚀 **8. Final Working `launch.json` Example**
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["-s", "tests/test_cli.py"],
+            "justMyCode": false,
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+Then:
+1. Go to the **Run & Debug** panel (left sidebar).
+2. Select **"Python: Debug Pytest"** from the dropdown.
+3. Click **Start Debugging (F5)**.
+
+---
+
+Let me know what error message you receive if the issue persists! 🚀
