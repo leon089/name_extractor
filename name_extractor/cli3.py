@@ -21,9 +21,9 @@ from name_extractor.text.converter import extract_names_from_text
     help="Specify if the input is a JSON file",
 )
 def main(input, is_json):
-    """
-    test
+    """etz.
 
+    test
     Extract names from TEXT or JSON files.
     """
     try:

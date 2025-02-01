@@ -1,3 +1,10 @@
+"""asjdh.
+
+This module provides a simple command-line interface (CLI) for extracting names
+from input arguments.
+It expects at least one argument and raises an error if none are provided.
+"""
+
 # __init__.py
 import logging
 
@@ -6,7 +13,7 @@ DEBUG_MODE = True
 
 # Configure logging
 logging.basicConfig(
-    level=logging.DEBUG,  # You can set the level to DEBUG, INFO, WARNING, ERROR, or CRITICAL
+    level=logging.DEBUG,  # levels DEBUG, INFO, WARNING, ERROR, or CRITICAL
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 

@@ -29,7 +29,6 @@ lint = "flake8 --exclude=venv,.venv"
 format = "black ."
 
 
-
 [tool.poetry.group.lint.dependencies]
 black = { version = "23.1.0" }
 check-manifest = { version = "0.49" }
@@ -58,3 +57,9 @@ exclude = '''
 )/
 '''
 line-length = 79
+
+
+# .flake8
+[flake8]
+max-line-length = 95 # >79, more flexibility
+ignore = ["E501"]
